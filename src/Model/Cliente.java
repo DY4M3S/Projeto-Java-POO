@@ -86,7 +86,7 @@ public class Cliente {
     }
 
     public void depositar (){ //digitar o valor,verificar >0,adicionar na conta, mensagem
-        System.out.println("Digite o valor a ser depositado:\n");
+        System.out.println("\nDigite o valor a ser depositado:\n");
 
         Scanner depositarDaConta = new Scanner (System.in);
         float input = depositarDaConta.nextFloat();
@@ -104,7 +104,7 @@ public class Cliente {
     }
 
     public void TransferirSaldo (Cliente origem, Cliente destino){
-        System.out.println("Digite o valor a ser transferido da conta  origem  para destino:\n");
+        System.out.println("\nDigite o valor a ser transferido da conta  origem  para destino:\n");
 
         Scanner transferirSaldo = new Scanner(System.in);
         float input = transferirSaldo.nextFloat();

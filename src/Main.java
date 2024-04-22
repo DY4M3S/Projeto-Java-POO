@@ -48,9 +48,10 @@ public class Main {
             }else if (opcao == 5) {
                 System.out.println("\nDigite o identificador: ");
                 int id = input.nextInt();
+                int posicaoCliente = banco.verificarSeExisteCliente(id);
 
-                if(banco.verificarSeExisteCliente(id)) {
-                    banco.getClientes().get(id).depositar();
+                if((posicaoCliente != -1)){
+                    banco.getClientes().get(posicaoCliente).depositar();
                 } else {
                     System.out.println("\nNao foi possivel concluir a operacao\n");
                 }
@@ -59,9 +60,9 @@ public class Main {
             }else if (opcao == 6) {
                 System.out.println("\nDigite o identificador: ");
                 int id = input.nextInt();
-
-                if(banco.verificarSeExisteCliente(id)) {
-                    banco.getClientes().get(id).sacar();
+                int posicaoCliente = banco.verificarSeExisteCliente(id);
+                if(posicaoCliente != -1) {
+                    banco.getClientes().get(posicaoCliente).sacar();
                 } else {
                     System.out.println("\nNao foi possivel concluir a operacao\n");
                 }
@@ -71,18 +72,18 @@ public class Main {
                 System.out.println("\nDigite o id da conta origem: ");
                 int id = input.nextInt();
 
-                boolean validarId = banco.verificarSeExisteCliente(id);
+                int validarId = banco.verificarSeExisteCliente(id);
 
                 System.out.println("\nDigite o id da conta destino: ");
                 int idDestino = input.nextInt();
 
-                boolean validarIdDestino = banco.verificarSeExisteCliente(idDestino);
+                int validarIdDestino = banco.verificarSeExisteCliente(idDestino);
 
-                if( validarId && validarIdDestino) {
+                if( validarId != -1 && validarIdDestino != -1) {
 
-                    banco.getClientes().get(id).TransferirSaldo(
-                            banco.getClientes().get(id),
-                            banco.getClientes().get(idDestino));
+                    banco.getClientes().get(validarId).TransferirSaldo(
+                            banco.getClientes().get(validarId),
+                            banco.getClientes().get(validarIdDestino));
                 } else {
                     System.out.println("\nNao foi possivel concluir a operacao\n");
                 }

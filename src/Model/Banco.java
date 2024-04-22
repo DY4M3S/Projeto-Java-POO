@@ -47,8 +47,7 @@ public class Banco {
         return cliente;
     }
 
-    public boolean verificarSeExisteCliente(int id) {
-        boolean status = false;
+    public int verificarSeExisteCliente(int id) {
 
         for (int posicao = 0; id <= this.clientes.toArray().length; posicao++) {
             Cliente cliente = this.clientes.get(posicao);
@@ -56,15 +55,11 @@ public class Banco {
             if (id == cliente.getId()) {
                 System.out.println(cliente);
 
-                status =  true;
-
-                return status;
-            } else {
-                System.out.println("\nCliente nao encontrado");
+                return posicao;
             }
-
         }
-        return status;
+        System.out.println("\nCliente nao encontrado");
+        return -1;
     }
 
     public  void adicionarCliente(Cliente cliente) {
@@ -72,15 +67,24 @@ public class Banco {
     }
 
     public void removerCliente(int id){
-        // boolean verificar = verificarSeExisteCliente(id);
-        if (verificarSeExisteCliente(id)) {
-            this.clientes.remove(this.clientes.get(id));
-            System.out.println("\nCliente removido com sucesso!");
+        int index = -1;
 
-        } else {
-            System.out.println("\nNao foi possivel concluir a operacao\n");
+        // Percorre a lista de clientes para encontrar o índice do cliente com o ID fornecido
+        for (int posicao = 0; posicao < this.clientes.size(); posicao++) {
+            Cliente cliente = this.clientes.get(posicao);
+
+            if (id == cliente.getId()) {
+                index = posicao; // Atualiza o índice se o cliente for encontrado
+                break;
+            }
         }
 
+        if (index != -1) {
+            this.clientes.remove(index);
+            System.out.println("\nCliente removido com sucesso!");
+        } else {
+            System.out.println("\nCliente não encontrado. Não foi possível concluir a operação.");
+        }
     }
 
     public float somarTodosSaldos(List<Cliente> clientes){ // retornar valor em float,
